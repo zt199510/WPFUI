@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net45", "Net45", "{8C8BADEE-BB67-425C-8F33-87349B884F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedResources", "SharedResources", "{9716594E-6C9D-4293-8E16-5D6FAA5AE7CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zt.UI.Silver", "Net45\Zt.UI.Silver\Zt.UI.Silver.csproj", "{592500EC-0E43-41DB-992D-B1106E0078D3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Zt.UI.Silver", "SharedResources\Zt.UI.Silver\Zt.UI.Silver.shproj", "{69E482AD-36A7-47BB-AA26-A4D901C3EA06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{B3BBBB5D-8408-4E0A-92AC-856FC3058645}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedResources\Zt.UI.Silver\Zt.UI.Silver.projitems*{592500ec-0e43-41db-992d-b1106e0078d3}*SharedItemsImports = 4
+		SharedResources\Zt.UI.Silver\Zt.UI.Silver.projitems*{69e482ad-36a7-47bb-aa26-a4d901c3ea06}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{592500EC-0E43-41DB-992D-B1106E0078D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592500EC-0E43-41DB-992D-B1106E0078D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592500EC-0E43-41DB-992D-B1106E0078D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592500EC-0E43-41DB-992D-B1106E0078D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3BBBB5D-8408-4E0A-92AC-856FC3058645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3BBBB5D-8408-4E0A-92AC-856FC3058645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3BBBB5D-8408-4E0A-92AC-856FC3058645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3BBBB5D-8408-4E0A-92AC-856FC3058645}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{592500EC-0E43-41DB-992D-B1106E0078D3} = {8C8BADEE-BB67-425C-8F33-87349B884F79}
+		{69E482AD-36A7-47BB-AA26-A4D901C3EA06} = {9716594E-6C9D-4293-8E16-5D6FAA5AE7CD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75EA7609-93E1-474C-9BC4-7163B5F6923B}
+	EndGlobalSection
+EndGlobal

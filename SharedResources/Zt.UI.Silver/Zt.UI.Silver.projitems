@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>69e482ad-36a7-47bb-aa26-a4d901c3ea06</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Zt.UI.Silver</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Control.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)NumberInput\NumberPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Resources\Converter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Resources\Resource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\ProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\RadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Loading.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BrushToColorConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\CheckBoxGlyphPathConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ComboBoxTextMarginConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\Converter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\CornerRadiusConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DirtyConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\LoadingBackgroundThicknessConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ObjectConvert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ProgressBarConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TabControlConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ThicknessToDoubleConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TreeViewVerticalChainConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventHandler\SearchTextChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventHandler\TabItemRemovedEventHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Global\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Global\Extension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\ButtonHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\CheckBoxHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\ComboBoxHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\IconHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\PasswordBoxHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\ProgressBarHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\RadioButtonHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\RepeatButtonHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\TabControlHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\TextBoxHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\TreeViewHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Mode\BrushAnimation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NumberInput\NumberPage.xaml.cs">
+      <DependentUpon>NumberPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\BrushUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\GridLengthUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\StoryboardUtils.cs" />
+  </ItemGroup>
+</Project>
