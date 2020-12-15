@@ -31,9 +31,7 @@ namespace Zt.UI.Silver
     {
 
 
-        [DllImport("user32.dll", EntryPoint = "WindowFromPoint")]
-        public static extern IntPtr WindowFromPoint(int xPoint,int yPoint);
-
+  
    
         public bool IsVerification { get; set; }
         public string Result { get; set; } = string.Empty;
@@ -43,16 +41,15 @@ namespace Zt.UI.Silver
         {
 
             InitializeComponent();
-            Subscribe();
-            EndNmae.Text = string.Empty;
-
+           // Subscribe();
+          
     
         }
         public NumberPage(float _Min=-999999, float _Max= 999999)
         {
             
             InitializeComponent();
-            Subscribe();
+           // Subscribe();
          
             EndNmae.Text = string.Empty;
             IsVerification = true;
@@ -109,6 +106,9 @@ namespace Zt.UI.Silver
                         EndNmae.Text = EndNmae.Text.Substring(0, EndNmae.Text.Length - 1);
                         break;
                     case "Close":
+                        
+                        this.Close();
+                        GC.Collect();
                         break;
                     case "-":
                         EndNmae.Text = reverse(float.Parse(EndNmae.Text)).ToString();
@@ -120,8 +120,8 @@ namespace Zt.UI.Silver
             }
             catch (Exception)
             {
+               
 
-            
             }
           
            
@@ -132,8 +132,8 @@ namespace Zt.UI.Silver
         {
            
           
-            keyboardMouseEvents.MouseDown -= MouseDown1Click;
-            keyboardMouseEvents.Dispose();
+            //keyboardMouseEvents.MouseDown -= MouseDown1Click;
+            //keyboardMouseEvents.Dispose();
         }
         private float reverse(float i)
         {
@@ -148,9 +148,7 @@ namespace Zt.UI.Silver
 
         private void MouseDown1Click(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            var handle = WindowFromPoint(e.X, e.Y);
-            if (handle == hwnd) return;
+           
         
             this.Close();
         }

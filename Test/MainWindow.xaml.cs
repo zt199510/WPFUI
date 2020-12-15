@@ -1,8 +1,10 @@
 ﻿using Gma.System.MouseKeyHook;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Test.ViewModel;
 
+
 namespace Test
 {
     /// <summary>
@@ -27,13 +30,22 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-           this.DataContext =viewmodel = new MainViewModel();
+            this.DataContext =viewmodel = new MainViewModel();
+         
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(viewmodel.Id.ToString());
             
+        }
+
+        ObservableCollection<ImageSource> imageSources = new ObservableCollection<ImageSource>();
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

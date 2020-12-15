@@ -6,115 +6,98 @@
         xmlns:local="clr-namespace:Test"
         xmlns:zt="clr-namespace:Zt.UI.Silver;assembly=Zt.UI.Silver" xmlns:local1="clr-namespace:Test.ValidationRuleS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-
+        Title="MainWindow" Height="450" Width="800" >
     <Window.Resources>
         <ResourceDictionary>
-          
+            <Style TargetType="{x:Type Button}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Red"> </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+      
+
+            <Style TargetType="{x:Type Border}">
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="(BorderBrush).(LinearGradientBrush).StartPoint" To="1,1" Duration="0:0:0.3" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                   
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid  Background="LightGray">
+    <Grid  Background="RoyalBlue" >
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+    
+        <!--<TextBox  x:Name="text"  Height="40" zt:TextBoxHelper.Watermark="请输入密码" ></TextBox>
+         <Button Grid.Column="1" Height="40" Width="100" Content="生成" Click="Button_Click_1" ></Button>
+
+        <UniformGrid Columns="10" Grid.Row="1" Grid.ColumnSpan="2">
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">版本:</TextBlock>
+            <ComboBox>
+                <ComboBoxItem IsSelected="True">1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+            </ComboBox>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">纠错等级</TextBlock>
+            <ComboBox>
+                <ComboBoxItem IsSelected="True">Q</ComboBoxItem>
+                <ComboBoxItem>W</ComboBoxItem>
+                <ComboBoxItem>E</ComboBoxItem>
+            </ComboBox>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">尺寸</TextBlock>
+            <TextBox x:Name="imgSize" ></TextBox>
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">前/背景色</TextBlock>
+            <TextBox></TextBox>
+            <TextBox></TextBox>
+        </UniformGrid>
+
+        <ItemsControl Grid.Row="2" x:Name="itemimg">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"></UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Width="40" Height="40"
+                          Source="{Binding}"
+                           ></Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            
+        </ItemsControl>-->
+        <!--<local:LeftSelectTech></local:LeftSelectTech>
+        <local:RightTechInfo Grid.Column="1"></local:RightTechInfo>-->
+        <Border Width="100" Height="40" BorderThickness="1" >
+            <Border.BorderBrush>
+                <LinearGradientBrush  StartPoint="1,1" EndPoint="0,0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStopCollection>
+                            <GradientStop Color="#11374c" Offset="0.97"></GradientStop>
+                            <GradientStop Color="White" Offset="1"></GradientStop>
+                        </GradientStopCollection>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+        </Border>
         
-        <Button  Height="30"
-                 Content="启动"
-                 FontSize="16"
-                 Width="100"
-                 FontFamily="{StaticResource FontAwesome}"
-                 zt:ButtonHelper.IsWaiting="False"
-                 zt:ButtonHelper.ClickStyle="Sink"
-                 zt:ButtonHelper.ButtonStyle="Hollow"
-                 zt:ButtonHelper.HoverBrush="RoyalBlue"
-                 Click="Button_Click"
-                 />
-
-        <TextBox  Height="30" Width="200"  
-                  Grid.Row="1"
-                  zt:TextBoxHelper.CornerRadius="2" 
-                  zt:TextBoxHelper.Changage="True"
-                  BorderThickness="1" 
-                  zt:IconHelper.FontFamily="{StaticResource FontAwesome}"
-                  zt:TextBoxHelper.Icon="&#xf11c;"
-                  zt:TextBoxHelper.IsVerification="True"
-                  zt:TextBoxHelper.MaxNum="1000"
-                  zt:TextBoxHelper.MinNum="-1000"
-                  zt:TextBoxHelper.Watermark="请输入密码" >
-            <TextBox.Text>
-                <Binding Path="Id" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" >
-                    <Binding.ValidationRules>
-                        <ExceptionValidationRule></ExceptionValidationRule>
-                        <local1:NumberRule></local1:NumberRule>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-
-        </TextBox>
-
-        <PasswordBox  Height="30"
-                       Width="200"
-                      Grid.Row="2"
-                      Password="123123123"
-zt:PasswordBoxHelper.Watermark="请输入密码"                 
-zt:PasswordBoxHelper.FocusedBorderBrush="#B5B5B5"
-zt:PasswordBoxHelper.FocusedShadowColor="Red"
-zt:PasswordBoxHelper.IsShowPwdButtonVisible="True"  />
-
-        <zt:Loading IsRunning="True" Grid.Row="3"  Width="20" Height="20" Background="Red" Foreground="Red"></zt:Loading>
-        
-        <CheckBox Grid.Row="4"  HorizontalAlignment="Left" VerticalAlignment="Center" zt:CheckBoxHelper.CheckBoxStyle="Switch2" zt:CheckBoxHelper.CornerRadius="0" Content="111"></CheckBox>
-        
-        <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <RadioButton zt:RadioButtonHelper.RadioButtonStyle="Button">123123</RadioButton>
-            <RadioButton zt:RadioButtonHelper.RadioButtonStyle="Button">123123</RadioButton>
-        </StackPanel>
-        <ComboBox  Height="30"
-                   Grid.Row="6"
-Width="200"
-zt:ComboBoxHelper.Icon="&#xf11c;"
-zt:ComboBoxHelper.HoverBackground="#1EB5B5B5"
-zt:ComboBoxHelper.SelectedBackground="#32B5B5B5"
-zt:ComboBoxHelper.IsSearchTextBoxVisible="False" >
-            <ComboBoxItem>11</ComboBoxItem>
-            <ComboBoxItem>11</ComboBoxItem>
-            <ComboBoxItem>11</ComboBoxItem>
-            <ComboBoxItem>11</ComboBoxItem>
-            <ComboBoxItem>11</ComboBoxItem>
-            <ComboBoxItem>22</ComboBoxItem>
-        </ComboBox>
-        <ProgressBar Grid.Row="7"  
-                     Width="200"
-                     Height="40"
-                     IsIndeterminate="True"
-                     zt:ProgressBarHelper.ProgressBarStyle="Standard" />
-        
-        <TabControl  Grid.Row="8" Width="240"
-                     zt:TabControlHelper.TabControlStyle="Card"
-                     zt:TabControlHelper.SelectedForeground="#3F3F3F" >
-            <TabItem Header="Item1"/>
-            <TabItem Header="Item2"/>
-            <TabItem Header="Item3"/>
-        </TabControl>
-
-        <TreeView  
-                   Grid.Row="9"
-Width="100"
-                   Height="50"
-zt:TreeViewHelper.ItemHeight="30"
-zt:TreeViewHelper.SelectedForeground="#FFB5B5B5" >
-            <TreeViewItem Header="Item1"/>
-            <TreeViewItem Header="Item2"/>
-            <TreeViewItem Header="Item3"/>
-        </TreeView>
     </Grid>
 </Window>

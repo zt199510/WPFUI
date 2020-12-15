@@ -101,6 +101,11 @@ namespace Zt.UI.Silver
         #endregion
 
 
+
+
+
+
+
         #region HeaderWidth
         public static string GetHeaderWidth(DependencyObject obj)
         {
@@ -186,6 +191,12 @@ namespace Zt.UI.Silver
         private static void TestMouseLefuDown(object sender, RoutedEventArgs e)
         {
             TextBox box = (TextBox)sender;
+            bool IsChangage = GetChangage(box);
+            if (IsChangage == false)
+            {
+                box.RemoveHandler(TextBox.PreviewMouseDownEvent, new RoutedEventHandler(TestMouseLefuDown));
+                
+            }
             Point WindosPoint = box.TransformToAncestor(Window.GetWindow(box)).Transform(new Point(0, 0));
             Point BoxPoint = box.PointToScreen(new Point(0, 0));
             NumberPage number;
@@ -207,19 +218,27 @@ namespace Zt.UI.Silver
             int hn = (int)box.ActualHeight;
             if(BoxPoint.Y+hn+ number.Width > 900)
             {
-                number.Left = BoxPoint.X + box.ActualWidth;
+              //  number.Left = BoxPoint.X + box.ActualWidth;
                 number.Top = WindosPoint.Y - number.Height;
             }
             else
             {
-                number.Left = BoxPoint.X;
+              //  number.Left = BoxPoint.X;
                 number.Top = BoxPoint.Y + hn;
             }
-            
+            int wn = (int)box.ActualWidth;
+            if (BoxPoint.X + wn + number.Width > 200)
+            {
+                number.Left = BoxPoint.X - number.Width;
+            }
+            else
+            {
+                number.Left = BoxPoint.X + box.ActualWidth;
+            }
             number.ShowDialog();
            
             box.Text = number.Result;
-            
+         
         }
 
         public static bool GetChangage(DependencyObject obj)

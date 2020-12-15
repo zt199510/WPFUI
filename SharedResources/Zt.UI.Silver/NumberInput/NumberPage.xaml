@@ -6,16 +6,9 @@
         xmlns:local="clr-namespace:Zt.UI.Silver"
         mc:Ignorable="d"  Width="220" Height="255"
         Title="NumberPage"   WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
-    <Window.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Themes/TextBox.xaml" >
-          
-        </ResourceDictionary>
-
-        
-    </Window.Resources>
+  
     <Grid >
-       
-    
+      
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>

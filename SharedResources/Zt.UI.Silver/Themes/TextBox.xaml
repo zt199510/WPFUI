@@ -7,7 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Resources/Converter.xaml" />
      
     </ResourceDictionary.MergedDictionaries>
-
+   
 
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="BorderBrush"
@@ -43,9 +43,9 @@
         <Setter Property="local:IconHelper.Foreground"
                 Value="{Binding Foreground,RelativeSource={RelativeSource Self},Mode=OneWay}" />
         <Setter Property="local:TextBoxHelper.TextBoxHook"
-                Value="True" />
+                Value="False" />
         <Setter Property="local:TextBoxHelper.Changage"
-                Value="True" />
+                Value="False" />
         <Setter Property="local:TextBoxHelper.IsVerification"
                 Value="False" />
       
@@ -57,9 +57,12 @@
                             <ColumnDefinition Width="{Binding Path=(local:TextBoxHelper.HeaderWidth),RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource GridLengthConverter}}" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+
                         <ContentControl x:Name="ContentHeader"
                                         VerticalAlignment="Center"
                                         Content="{Binding Path=(local:TextBoxHelper.Header),RelativeSource={RelativeSource AncestorType=TextBox}, Mode=OneWay}" />
+
+
                         <Border x:Name="BdrOuter"
                                 Grid.Column="1"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -116,6 +119,7 @@
                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                             Opacity="0.6" />
+                                
                             </Grid>
                             <Button x:Name="PART_BtnClear"
                                     FontSize="{TemplateBinding FontSize}"
@@ -125,7 +129,9 @@
                                     local:ButtonHelper.ButtonStyle="Link"
                                     Content="×"
                                     Visibility="{Binding Path=(local:TextBoxHelper.IsClearButtonVisible),RelativeSource={RelativeSource AncestorType=TextBox}, Converter={StaticResource BoolToVisibleConverter}}" />
+                         
                         </Grid>
+                   
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Path=(local:TextBoxHelper.Icon),Converter={StaticResource IsNotNullConverter},RelativeSource={RelativeSource Self}}"
@@ -164,6 +170,9 @@
                             <Setter Property="Visibility"
                                     TargetName="tbWatermark"
                                     Value="Visible" />
+                            <!--<Setter Property="Text"  Value="{Binding Path=Tag,RelativeSource={RelativeSource AncestorType=TextBox}, Mode=OneWay}"/>-->
+
+
                         </DataTrigger>
                         <Trigger  Property="IsEnabled"
                                   Value="False">
@@ -224,13 +233,13 @@
                 <Setter Property="VerticalScrollBarVisibility"
                         Value="Auto" />
             </Trigger>
-           
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
+                    
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter Property="ToolTip"
                             Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
-                <Setter Property="Text" Value=""></Setter>
-                </Trigger>
-           
+            </Trigger>
+         
+
         </Style.Triggers>
     </Style>
 
