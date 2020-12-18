@@ -19,7 +19,7 @@
 
       
 
-            <Style TargetType="{x:Type Border}">
+            <!--<Style TargetType="{x:Type Border}">
                 <Style.Triggers>
                     <EventTrigger RoutedEvent="Border.MouseEnter">
                         <EventTrigger.Actions>
@@ -32,7 +32,7 @@
                     </EventTrigger>
                    
                 </Style.Triggers>
-            </Style>
+            </Style>-->
         </ResourceDictionary>
     </Window.Resources>
     <Grid  Background="RoyalBlue" >
@@ -45,9 +45,13 @@
             <ColumnDefinition ></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-    
+        <StackPanel  x:Name="asd" HorizontalAlignment="Left" Width="100">
+            <TextBlock x:Name="text" ></TextBlock>
+            <Button Grid.Column="1"  x:Name="btn" Width="20" Content="成" Click="Button_Click_1" HorizontalAlignment="Right"></Button>
+        </StackPanel>
+      
         <!--<TextBox  x:Name="text"  Height="40" zt:TextBoxHelper.Watermark="请输入密码" ></TextBox>
-         <Button Grid.Column="1" Height="40" Width="100" Content="生成" Click="Button_Click_1" ></Button>
+       <Button Grid.Column="1" Height="40" Width="100" Content="生成" Click="Button_Click_1" ></Button>
 
         <UniformGrid Columns="10" Grid.Row="1" Grid.ColumnSpan="2">
             <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">版本:</TextBlock>
@@ -86,7 +90,7 @@
         </ItemsControl>-->
         <!--<local:LeftSelectTech></local:LeftSelectTech>
         <local:RightTechInfo Grid.Column="1"></local:RightTechInfo>-->
-        <Border Width="100" Height="40" BorderThickness="1" >
+        <!--<Border Width="100" Height="40" BorderThickness="1" >
             <Border.BorderBrush>
                 <LinearGradientBrush  StartPoint="1,1" EndPoint="0,0">
                     <LinearGradientBrush.GradientStops>
@@ -97,7 +101,7 @@
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
             </Border.BorderBrush>
-        </Border>
+        </Border>-->
         
     </Grid>
 </Window>

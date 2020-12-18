@@ -31,8 +31,8 @@ namespace Test
         {
             InitializeComponent();
             this.DataContext =viewmodel = new MainViewModel();
-         
-           
+
+            text.Width = asd.ActualWidth - btn.Width;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
