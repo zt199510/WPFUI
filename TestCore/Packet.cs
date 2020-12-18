@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -152,7 +153,42 @@ namespace TestCore
                     ReadObject(reader, p);
                 }
             }
+
+            p.Length = length;
+
+            return p;
         }
+
+
+        public byte[] GetPacketBytes()
+        {
+            byte[] packet;
+
+            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write((short)Packets.IndexOf(GetType()));
+                WriteObject(writer, this);
+                packet = stream.ToArray();
+            }
+
+            Length = packet.Length;
+
+            using (MemoryStream stream = new MemoryStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(packet.Length + 4); //| 4Bytes: Packet Size | Data... |
+                writer.Write(packet);
+
+                return stream.ToArray();
+            }
+        }
+
+        private void WriteObject(BinaryWriter writer, object packet)
+        {
+           
+        }
+
         /// <summary>
         /// 读取继承Packet 的公共属性
         /// </summary>
@@ -163,17 +199,94 @@ namespace TestCore
             Type type = ob.GetType();
             PropertyInfo[] properties = type.GetProperties();
 
+            //判断读到的类型集合
             foreach (PropertyInfo item in properties)
             {
                 if (item.GetCustomAttribute<IgnorePropertyPacket>() != null) return;
                 Func<BinaryReader, object> readAction;
                 if(!TypeRead.TryGetValue(item.PropertyType, out readAction))
                 {
+                    //判断类或者委托
                     if (item.PropertyType.IsClass)
                     {
                         if (!reader.ReadBoolean()) continue;
                         item.SetValue(ob, Activator.CreateInstance(item.PropertyType));
                     }
+
+                    //判断枚举
+                    if (item.PropertyType.IsEnum)
+                        item.SetValue(ob, TypeRead[item.PropertyType.GetEnumUnderlyingType()](reader));
+                    //判断是否是泛型
+                    else if (item.PropertyType.IsGenericType)
+                    {
+                        ///判断是否为集合
+                        if (item.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+                        {
+
+                            IList list = (IList)item.GetValue(ob);
+                            int count = reader.ReadInt32();
+                            Type genType = item.PropertyType.GetGenericArguments()[0];
+                            //判断值相等
+                            if (!TypeRead.TryGetValue(genType, out readAction))
+                            {
+                                if (genType.IsEnum)
+                                {
+                                    ///读取枚举基础类
+                                    genType = genType.GetEnumUnderlyingType();
+
+                                    for (int i = 0; i < count; i++)
+                                        list.Add(TypeRead[genType](reader));
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        ///读取Bool值流
+                                        if (!reader.ReadBoolean()) continue;
+                                        ///创建流的实例
+                                        object value = Activator.CreateInstance(genType);
+                                        list.Add(value);
+                                        ReadObject(reader, value);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                for (int i = 0; i < count; i++)
+                                    list.Add(readAction(reader));
+                            }
+
+                        }
+                        else if (item.PropertyType.GetGenericTypeDefinition() == typeof(SortedDictionary<,>))
+                        {
+                            IDictionary dictionary = (IDictionary)item.GetValue(ob);
+
+                            int count = reader.ReadInt32();
+
+                            Type genKey = item.PropertyType.GetGenericArguments()[0];
+                            Type genValue = item.PropertyType.GetGenericArguments()[1];
+
+                            Func<BinaryReader, object> keyAction = null;
+                            Func<BinaryReader, object> valueAction = null;
+
+                            if (!TypeRead.TryGetValue(genKey, out keyAction))
+                            {
+                                if (genKey.IsEnum)
+                                    keyAction = TypeRead[genKey.GetEnumUnderlyingType()];
+                            }
+
+                            if (!TypeRead.TryGetValue(genValue, out valueAction))
+                            {
+                                if (genValue.IsEnum)
+                                    valueAction = TypeRead[genValue.GetEnumUnderlyingType()];
+                            }
+                        }
+
+
+
+                    }
+
+
                 }
 
             }
