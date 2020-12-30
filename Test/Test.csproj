@@ -118,6 +118,9 @@
     <Compile Include="TechModel\ST_PiercingLaserControl.cs" />
     <Compile Include="TechModel\TechnologyInfo.cs" />
     <Compile Include="TechModel\TechnologyNodeList.cs" />
+    <Compile Include="UIlist\FirstOneUI.xaml.cs">
+      <DependentUpon>FirstOneUI.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ValidationRuleS\NumberRule.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="LeftSelectTech.xaml">
@@ -137,6 +140,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RightTechInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UIlist\FirstOneUI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

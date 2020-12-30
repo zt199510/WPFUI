@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestCore
+namespace DotServer
 {
     public static class Time
     {

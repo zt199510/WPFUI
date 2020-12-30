@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-
-namespace TestCore
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+namespace DotServer
 {
     public abstract class Packet
     {
@@ -184,13 +187,123 @@ namespace TestCore
             }
         }
 
-        private void WriteObject(BinaryWriter writer, object packet)
+        /// <summary>
+        /// 写入流
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="ob"></param>
+        private void WriteObject(BinaryWriter writer, object ob)
         {
-           
+            //获取类的公共变量
+            PropertyInfo[] properties = ob.GetType().GetProperties();
+
+            foreach (PropertyInfo item in properties)
+            {
+
+                if (item.GetCustomAttribute<IgnorePropertyPacket>() != null) continue;
+                Action<object, BinaryWriter> writeAction;
+                if(!TypeWrite.TryGetValue(item.PropertyType,out writeAction))
+                {
+                    //判断类
+                    if (item.PropertyType.IsClass)
+                    {
+                        object value = item.GetValue(ob);
+                        writer.Write(value != null);
+                        if (value == null) continue;
+                    }
+
+                    //判断枚举
+                    if (item.PropertyType.IsEnum)
+                        TypeWrite[item.PropertyType.GetEnumUnderlyingType()](item.GetValue(ob),writer);
+                    ///判断是否是泛型
+                    else if (item.PropertyType.IsGenericType)
+                    {
+                        //判断泛型对象是不是集合
+                        if (item.PropertyType.GetGenericTypeDefinition() == typeof(List<>))
+                        {
+                            IList list = (IList)item.GetValue(ob);
+                            writer.Write(list.Count);
+                            Type genType = item.PropertyType.GetGenericArguments()[0];
+                            if (!TypeWrite.TryGetValue(genType, out writeAction))
+                            {
+                                //判断枚举
+                                if (genType.IsEnum)
+                                {
+                                    genType = genType.GetEnumUnderlyingType();
+                                    foreach (object x in list)
+                                        TypeWrite[genType](x, writer);
+                                }
+                                else
+                                {
+                                    foreach (object x in list)
+                                    {
+                                        writer.Write(x != null);
+                                        if (x == null) continue;
+                                        WriteObject(writer, x);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (object x in list)
+                                    writeAction(x, writer);
+                            }
+                        }///判断资源字典
+                        else if(item.PropertyType.GetGenericTypeDefinition() == typeof(SortedDictionary<,>))
+                        {
+                            IDictionary dictionary = (IDictionary)item.GetValue(ob);
+                            writer.Write(dictionary.Count);
+                            Type genKey = item.PropertyType.GetGenericArguments()[0];
+                            Type genValue = item.PropertyType.GetGenericArguments()[1];
+                            Action<object, BinaryWriter> keyAction = null;
+                            Action<object, BinaryWriter> valueAction = null;
+                            if (!TypeWrite.TryGetValue(genKey, out keyAction))
+                            {
+                                if (genKey.IsEnum)
+                                    keyAction = TypeWrite[genKey.GetEnumUnderlyingType()];
+                            }
+
+                            if (!TypeWrite.TryGetValue(genValue, out valueAction))
+                            {
+                                if (genValue.IsEnum)
+                                    valueAction = TypeWrite[genValue.GetEnumUnderlyingType()];
+                            }
+
+                            foreach (object key in dictionary.Keys)
+                            {
+                                if (keyAction == null)
+                                    WriteObject(writer, key); //Not allowed to have Null Key so no point checking.
+                                else
+                                    keyAction(key, writer);
+
+                                if (valueAction == null)
+                                {
+                                    writer.Write(dictionary[key] != null);
+                                    if (dictionary[key] == null) continue;
+
+                                    WriteObject(writer, dictionary[key]);
+                                }
+                                else
+                                    valueAction(dictionary[key], writer);
+                            }
+                        }
+                        else if (item.PropertyType.IsClass)
+                            WriteObject(writer, item.GetValue(ob));
+                        else
+                            throw new NotImplementedException($"未执行异常: WirteObject: Type:{item.PropertyType}.");
+                        continue;
+                    }
+
+                }
+
+                writeAction(item.GetValue(ob), writer);
+            }
+
+
         }
 
         /// <summary>
-        /// 读取继承Packet 的公共属性
+        /// 读取继承Packet 的公共属性(读取流)
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="ob"></param>
@@ -202,7 +315,7 @@ namespace TestCore
             //判断读到的类型集合
             foreach (PropertyInfo item in properties)
             {
-                if (item.GetCustomAttribute<IgnorePropertyPacket>() != null) return;
+                if (item.GetCustomAttribute<IgnorePropertyPacket>() != null) continue;
                 Func<BinaryReader, object> readAction;
                 if(!TypeRead.TryGetValue(item.PropertyType, out readAction))
                 {
@@ -268,29 +381,61 @@ namespace TestCore
 
                             Func<BinaryReader, object> keyAction = null;
                             Func<BinaryReader, object> valueAction = null;
-
                             if (!TypeRead.TryGetValue(genKey, out keyAction))
                             {
                                 if (genKey.IsEnum)
                                     keyAction = TypeRead[genKey.GetEnumUnderlyingType()];
                             }
-
                             if (!TypeRead.TryGetValue(genValue, out valueAction))
                             {
                                 if (genValue.IsEnum)
                                     valueAction = TypeRead[genValue.GetEnumUnderlyingType()];
                             }
+                            for (int i = 0; i < count; i++)
+                            {
+                                object key;
+                                object value;
+                                if (keyAction == null)
+                                {
+                                    key = Activator.CreateInstance(genKey); //Never Null as it's a key
+                                    ReadObject(reader, key);
+                                }
+                                else
+                                    key = keyAction(reader);
+                                if (valueAction == null)
+                                {
+                                    if (!reader.ReadBoolean())
+                                    {
+                                        value = null;
+                                    }
+                                    else
+                                    {
+                                        value = Activator.CreateInstance(genKey);
+                                        ReadObject(reader, value);
+                                    }
+                                }
+                                else
+                                    value = valueAction(reader);
+                                dictionary[key] = value;
+                            }
                         }
-
-
-
                     }
-
-
+                    else if (item.PropertyType.IsClass)
+                        ReadObject(reader, item.GetValue(ob));
+                    else
+                        throw new NotImplementedException($"未执行异常: ReadObject: Type: {item.PropertyType}.");
+                    continue;
                 }
-
+                item.SetValue(ob, readAction(reader));
             }
+            MethodInfo[] Methods = type.GetMethods();
 
+            foreach (MethodInfo item in Methods)
+            {
+                if (item.GetCustomAttribute<CompleteObject>() == null) continue;
+
+                item.Invoke(ob, null);
+            }
         }
 
 

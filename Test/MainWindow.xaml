@@ -4,104 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
-        xmlns:zt="clr-namespace:Zt.UI.Silver;assembly=Zt.UI.Silver" xmlns:local1="clr-namespace:Test.ValidationRuleS"
+        xmlns:zt="clr-namespace:Zt.UI.Silver;assembly=Zt.UI.Silver" xmlns:local1="clr-namespace:Test.ValidationRuleS" xmlns:uilist="clr-namespace:Test.UIlist"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
-    <Window.Resources>
-        <ResourceDictionary>
-            <Style TargetType="{x:Type Button}">
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="Red"> </Setter>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-      
-
-            <!--<Style TargetType="{x:Type Border}">
-                <Style.Triggers>
-                    <EventTrigger RoutedEvent="Border.MouseEnter">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ThicknessAnimation Storyboard.TargetProperty="(BorderBrush).(LinearGradientBrush).StartPoint" To="1,1" Duration="0:0:0.3" />
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                   
-                </Style.Triggers>
-            </Style>-->
-        </ResourceDictionary>
-    </Window.Resources>
-    <Grid  Background="RoyalBlue" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition ></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel  x:Name="asd" HorizontalAlignment="Left" Width="100">
-            <TextBlock x:Name="text" ></TextBlock>
-            <Button Grid.Column="1"  x:Name="btn" Width="20" Content="成" Click="Button_Click_1" HorizontalAlignment="Right"></Button>
-        </StackPanel>
-      
-        <!--<TextBox  x:Name="text"  Height="40" zt:TextBoxHelper.Watermark="请输入密码" ></TextBox>
-       <Button Grid.Column="1" Height="40" Width="100" Content="生成" Click="Button_Click_1" ></Button>
-
-        <UniformGrid Columns="10" Grid.Row="1" Grid.ColumnSpan="2">
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">版本:</TextBlock>
-            <ComboBox>
-                <ComboBoxItem IsSelected="True">1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-            </ComboBox>
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">纠错等级</TextBlock>
-            <ComboBox>
-                <ComboBoxItem IsSelected="True">Q</ComboBoxItem>
-                <ComboBoxItem>W</ComboBoxItem>
-                <ComboBoxItem>E</ComboBoxItem>
-            </ComboBox>
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">尺寸</TextBlock>
-            <TextBox x:Name="imgSize" ></TextBox>
-            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center">前/背景色</TextBlock>
-            <TextBox></TextBox>
-            <TextBox></TextBox>
-        </UniformGrid>
-
-        <ItemsControl Grid.Row="2" x:Name="itemimg">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="4"></UniformGrid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Image Width="40" Height="40"
-                          Source="{Binding}"
-                           ></Image>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            
-        </ItemsControl>-->
-        <!--<local:LeftSelectTech></local:LeftSelectTech>
-        <local:RightTechInfo Grid.Column="1"></local:RightTechInfo>-->
-        <!--<Border Width="100" Height="40" BorderThickness="1" >
-            <Border.BorderBrush>
-                <LinearGradientBrush  StartPoint="1,1" EndPoint="0,0">
-                    <LinearGradientBrush.GradientStops>
-                        <GradientStopCollection>
-                            <GradientStop Color="#11374c" Offset="0.97"></GradientStop>
-                            <GradientStop Color="White" Offset="1"></GradientStop>
-                        </GradientStopCollection>
-                    </LinearGradientBrush.GradientStops>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-        </Border>-->
-        
+        Title="MainWindow" Height="768" Width="1024"  WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
+ 
+    <Grid   Background="Transparent">
+        <uilist:FirstOneUI></uilist:FirstOneUI>
     </Grid>
 </Window>
