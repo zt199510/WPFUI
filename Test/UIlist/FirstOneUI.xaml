@@ -3,38 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Test.UIlist"
+             xmlns:local="clr-namespace:Test.UIlist" xmlns:local1="clr-namespace:Zt.UI.Silver;assembly=Zt.UI.Silver"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
-
+              
             <Style TargetType="{x:Type RadioButton}">
+               
                 <Setter Property="FontSize" Value="14"/>
-                <Setter Property="Margin" Value="2,5"></Setter>
-
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="Margin" Value="1,5"></Setter>
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Center" />
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="BorderBrush"
+                        Value="LightGray" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="10,0" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type RadioButton}">
-                            <Grid x:Name="templateRoot"     >
+                            <Grid x:Name="GrdMain" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="8"></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition Width="8"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
+                                <Border  Grid.ColumnSpan="3"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}"
+                                        Opacity="0" />
                                 <Border x:Name="border"    CornerRadius="15" Grid.ColumnSpan="3"  Grid.RowSpan="3" />
                                 <Border x:Name="bd2"   Grid.Column="1" Grid.RowSpan="3"  />
-                                <ContentPresenter x:Name="contentPresenter"  ContentTemplate="{TemplateBinding ContentTemplate}"
-                                              Content="{TemplateBinding Content}" Grid.Column="1"  
-                                              ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" 
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                <ContentPresenter Grid.Column="1"  
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  Content="{TemplateBinding Content}"
+                                                  TextBlock.Foreground="{TemplateBinding Foreground}" />
+                        
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsChecked" Value="True">
@@ -45,7 +60,6 @@
                                 </Trigger>
                                 <Trigger Property="IsChecked" Value="{x:Null}"/>
                                 <Trigger Property="IsChecked" Value="False">
-
                                     <Setter Property="BorderThickness" Value="0 0 0 2" TargetName="bd2"/>
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
