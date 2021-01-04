@@ -147,6 +147,7 @@ namespace Zt.UI.Silver
             return (bool)obj.GetValue(IsShowPwdButtonVisibleProperty);
         }
 
+      
         public static void SetIsShowPwdButtonVisible(DependencyObject obj, bool value)
         {
             obj.SetValue(IsShowPwdButtonVisibleProperty, value);

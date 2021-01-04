@@ -18,6 +18,7 @@ namespace Zt.UI.Silver
             return (TabControlStyle)obj.GetValue(TabControlStyleProperty);
         }
 
+        
         public static void SetTabControlStyle(DependencyObject obj, TabControlStyle value)
         {
             obj.SetValue(TabControlStyleProperty, value);

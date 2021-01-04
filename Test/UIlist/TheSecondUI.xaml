@@ -1,0 +1,370 @@
+﻿<UserControl x:Class="Test.UIlist.TheSecondUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Test.UIlist"
+               xmlns:zt="clr-namespace:Zt.UI.Silver;assembly=Zt.UI.Silver" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="{x:Type RadioButton}">
+
+
+                <Setter Property="FontFamily" Value="微软雅黑" />
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Left" />
+                <Setter Property="Background"
+                        Value="White" />
+                <Setter Property="BorderBrush"
+                        Value="LightGray" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="10,0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type RadioButton}">
+                            <Grid x:Name="GrdMain" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="10"></ColumnDefinition>
+                                    <ColumnDefinition  Width="0.2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border  Grid.ColumnSpan="2"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}"
+                                        Opacity="0" />
+                                
+                                <Ellipse Width="5" x:Name="Eps" HorizontalAlignment="Right" Height="5"  Grid.Column="1" Fill="Gray"></Ellipse>
+                                <ContentPresenter Grid.Column="2"  
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  Content="{TemplateBinding Content}"
+                                                  TextBlock.Foreground="{TemplateBinding Foreground}" />
+
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Fill" Value="Green" TargetName="Eps"/>
+                                    <Setter Property="Foreground" Value="Green"/>
+                                   
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="{x:Null}"/>
+                                <Trigger Property="IsChecked" Value="False">
+                                   
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+
+                                 
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type Expander}">
+                <Setter Property="Foreground" Value="#FF217cb5"/>
+                <Setter Property="FontFamily" Value="微软雅黑" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Expander}">
+                            <Grid x:Name="MainGrid" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5"></ColumnDefinition>
+                                    <ColumnDefinition Width="10"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Border  x:Name="Brd1"></Border>
+                                <Border Grid.Column="2" CornerRadius="8" x:Name="Brd"></Border>
+                                <ToggleButton x:Name="HeaderSite"  Grid.Row="0" Background="Transparent" Grid.Column="2"
+                          ContentTemplate="{TemplateBinding HeaderTemplate}" 
+                          ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                          Content="{TemplateBinding Header}"                                   
+                          IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"                                  
+                          Style="{DynamicResource ExpanderToggleButtonStyle}" />
+                                <ContentPresenter x:Name="ExpandSite" Grid.Column="1"  Grid.Row="1" Grid.ColumnSpan="2"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsExpanded" Value="True">
+                                    <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
+                                    <Setter Property="Background" Value="#3dce9f" TargetName="Brd1"></Setter>
+                                    <Setter Property="Opacity" Value="0" TargetName="Brd"></Setter>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                                <Trigger Property="IsExpanded" Value="False">
+                                    <Setter Property="Opacity" Value="1" TargetName="Brd"></Setter>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#3dce9f" TargetName="Brd"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type ToggleButton}">
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="微软雅黑" />
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Padding" Value="10 5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Canvas Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <Canvas x:Name="canvNormal" Visibility="Visible" 
+                     Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                     Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Canvas.Right="0">
+                                    <Path Data="M 0 0 L 6 6  12 0 " Stroke="LightSteelBlue" StrokeThickness="2" Canvas.Right="5" Canvas.Top="10"/>
+                                    <Path Data="M 0 0 L 6 6  12 0 " Stroke="LightSteelBlue" StrokeThickness="2" Canvas.Right="5" Canvas.Top="15"/>
+                                </Canvas>
+                                <Canvas x:Name="canvChecked" Visibility="Hidden" 
+                     Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                     Background="{TemplateBinding Background}" SnapsToDevicePixels="True" Canvas.Right="0">
+                                    <Path Data="M 0 0 L 6 -6  12 0 " Stroke="LightSteelBlue" StrokeThickness="2" Canvas.Right="5" Canvas.Top="15"/>
+                                    <Path Data="M 0 0 L 6 -6  12 0 " Stroke="LightSteelBlue" StrokeThickness="2" Canvas.Right="5" Canvas.Top="20"/>
+                                </Canvas>
+                    
+                                <ContentPresenter 
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                
+                     Margin="{TemplateBinding Padding}" 
+                     RecognizesAccessKey="True"                  
+                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Canvas>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter Property="Background" Value="SlateGray" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter Property="Visibility" TargetName="canvChecked" Value="Visible" />
+                                    <Setter Property="Visibility" TargetName="canvNormal" Value="Hidden" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+          
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Ellipse Fill="Blue" Margin="5"></Ellipse>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Height="25" FontWeight="Black" FontSize="16">LeaWn</TextBlock>
+                    <UniformGrid  Columns="2">
+                        <TextBlock >个人中心</TextBlock>
+                        <TextBlock HorizontalAlignment="Right">退出</TextBlock>
+                    </UniformGrid>
+                </StackPanel>
+            </Grid>
+            <Expander Header="首页">
+                
+            </Expander>
+            <Expander Header="项目管理">
+                <StackPanel>
+                    <RadioButton Height="40">管理项目</RadioButton>
+                    <RadioButton Height="40">新建项目</RadioButton>
+                </StackPanel>
+            </Expander>
+            <Expander Header="工人管理"/>
+            <Expander Header="考勤管理"/>
+            <Expander Header="工资管理"/>
+            <Expander Header="协议管理"/>
+            <Expander Header="建工平台"/>
+            <Expander Header="系统设置"/>
+        </StackPanel>
+        <Grid Grid.Column="1" Background="#F3F4F6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Background="White" Grid.ColumnSpan="2" ></Border>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="20"></RowDefinition>
+                    <RowDefinition Height="160"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <UniformGrid Columns="4" Grid.Row="1" MaxHeight="140"  HorizontalAlignment="Left">
+                    <UniformGrid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="FontSize" Value="14" />
+                                <Setter Property="FontFamily" Value="微软雅黑" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Style>
+                        </ResourceDictionary>
+                    </UniformGrid.Resources>
+                    <Grid Margin="5"  Width="220"  >
+                        <Border Background="#3dce9f" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="275" Opacity="0.1" />
+                            </Border.Effect>
+                           
+                        </Border>
+                        <StackPanel  Margin="5,5">
+                            <TextBlock    >总项目</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"  Foreground="#CEF0DA"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
+                        </StackPanel>
+                        
+                    </Grid>
+                    <Grid Margin="5" MaxWidth="220">
+                        <Border Background="#1890ff" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="275" Opacity="0.1"/>
+                            </Border.Effect>
+                        
+                        </Border>
+                        <StackPanel  Margin="5,5" >
+                            <TextBlock    >开工项目</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"   Foreground="#C3E2FF"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="5" MaxWidth="220">
+                        <Border Background="#EB7872" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="275" Opacity="0.1"/>
+                            </Border.Effect>
+                          
+                        </Border>
+                        <StackPanel  Margin="5,5" >
+                            <TextBlock    >暂停项目</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"  Foreground="#F7CAC8"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Margin="5" MaxWidth="240">
+                        <Border Background="#9076FD" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="275" Opacity="0.1"/>
+                            </Border.Effect>
+                           
+                        </Border>
+                        <StackPanel  Margin="5,5">
+                            <TextBlock   >已结束项目</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"  Foreground="#B8A7FE"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
+                        </StackPanel>
+                    </Grid>
+                </UniformGrid>
+
+
+                <UniformGrid Columns="2" Grid.Row="2">
+                    <Grid Margin="5">
+                        <Border Background="White" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="275" Opacity="0.1"/>
+                            </Border.Effect>
+                        </Border>
+
+                        <lvc:CartesianChart  DataTooltip="{x:Null}">
+                            <lvc:CartesianChart.Series>
+                                <lvc:ColumnSeries Values="5,6,7,9,2,4,6,5,9,7,5,10"/>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis LabelFormatter="{Binding Formatter}">
+                                    <lvc:Axis.Sections>
+                                        <lvc:AxisSection Value="{Binding YPointer}" 
+                                         DataLabel="True"
+                                         StrokeThickness="1"
+                                         Stroke="#ff5722"
+                                         DisableAnimations="True"
+                                         DataLabelForeground="White"
+                                         Panel.ZIndex="1"/>
+                                    </lvc:Axis.Sections>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                              
+                        </lvc:CartesianChart>
+                    </Grid>
+                    <Grid Margin="5">
+                        <Border Background="White" CornerRadius="10" >
+                            <Border.Effect>
+                                <DropShadowEffect Direction="275" Opacity="0.1"/>
+                            </Border.Effect>
+                        </Border>
+
+                        <lvc:CartesianChart  DataTooltip="{x:Null}">
+                            <lvc:CartesianChart.Series>
+                                <lvc:ColumnSeries Values="5,6,7,9,2,4,6,5,9,7,5,10"/>
+                            </lvc:CartesianChart.Series>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis LabelFormatter="{Binding Formatter}">
+                                    <lvc:Axis.Sections>
+                                        <lvc:AxisSection Value="{Binding YPointer}" 
+                                         DataLabel="True"
+                                         StrokeThickness="1"
+                                         Stroke="#ff5722"
+                                         DisableAnimations="True"
+                                         DataLabelForeground="White"
+                                         Panel.ZIndex="1"/>
+                                    </lvc:Axis.Sections>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                          
+                        </lvc:CartesianChart>
+                    </Grid>
+                </UniformGrid>
+            
+            </Grid>
+          
+        </Grid>
+
+     
+        
+    </Grid>
+</UserControl>

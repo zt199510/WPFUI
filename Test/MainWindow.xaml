@@ -6,14 +6,10 @@
         xmlns:local="clr-namespace:Test"
         xmlns:zt="clr-namespace:Zt.UI.Silver;assembly=Zt.UI.Silver" xmlns:local1="clr-namespace:Test.ValidationRuleS" xmlns:uilist="clr-namespace:Test.UIlist"
         mc:Ignorable="d"
-        Title="MainWindow" Height="768" Width="1024"  WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
+        Title="MainWindow" Height="900" Width="1440"  WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Background="Transparent">
  
     <Grid   Background="White">
-        <uilist:FirstOneUI></uilist:FirstOneUI>
-        <!--<StackPanel >
-            <RadioButton zt:RadioButtonHelper.RadioButtonStyle="Button" Height="50">123123</RadioButton>
-            <RadioButton  zt:RadioButtonHelper.RadioButtonStyle="Button" Height="50">12312312</RadioButton>
-        </StackPanel>-->
-   
+        <!--<uilist:FirstOneUI></uilist:FirstOneUI>-->
+        <uilist:TheSecondUI></uilist:TheSecondUI>
     </Grid>
 </Window>
