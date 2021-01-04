@@ -256,7 +256,7 @@
                         </Border>
                         <StackPanel  Margin="5,5">
                             <TextBlock    >总项目</TextBlock>
-                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">15</TextBlock>
                             <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"  Foreground="#CEF0DA"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
                         </StackPanel>
                         
@@ -270,7 +270,7 @@
                         </Border>
                         <StackPanel  Margin="5,5" >
                             <TextBlock    >开工项目</TextBlock>
-                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">16</TextBlock>
                             <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"   Foreground="#C3E2FF"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
                         </StackPanel>
                     </Grid>
@@ -283,7 +283,7 @@
                         </Border>
                         <StackPanel  Margin="5,5" >
                             <TextBlock    >暂停项目</TextBlock>
-                            <TextBlock  FontSize="55" FontWeight="Black">18</TextBlock>
+                            <TextBlock  FontSize="55" FontWeight="Black">17</TextBlock>
                             <ProgressBar Height="5" VerticalAlignment="Bottom"  zt:ProgressBarHelper.ProgressBarStyle="Standard" zt:ProgressBarHelper.CornerRadius="5" Background="White"  Foreground="#F7CAC8"  zt:ProgressBarHelper.AnimateTo="15" ></ProgressBar>
                         </StackPanel>
                     </Grid>
@@ -328,7 +328,13 @@
                                     </lvc:Axis.Sections>
                                 </lvc:Axis>
                             </lvc:CartesianChart.AxisY>
-                              
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis LabelsRotation="-25" Labels="January, February, March, April, May, Jun, July, Agust, September, October, November, December">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
                         </lvc:CartesianChart>
                     </Grid>
                     <Grid Margin="5">
@@ -355,7 +361,14 @@
                                     </lvc:Axis.Sections>
                                 </lvc:Axis>
                             </lvc:CartesianChart.AxisY>
-                          
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis LabelsRotation="-25" Labels="January, February, March, April, May, Jun, July, Agust, September, October, November, December">
+                                   
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
                         </lvc:CartesianChart>
                     </Grid>
                 </UniformGrid>
