@@ -1,12 +1,16 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:Zt.UI.Silver.Converters"
-    >
+    xmlns:converter="clr-namespace:Zt.UI.Silver.Converters">
     <converter:IsNotNullConverter x:Key="IsNotNullConverter" />
     <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
     <converter:IconConverter x:Key="IconConverter" />
     <converter:Add3Converter x:Key="Add3Converter" />
+
+    <converter:Add5Converter x:Key="Add5Converter" />
+    <converter:Add10Converter x:Key="Add10Converter" />
+
+
     <converter:GridLengthConverter x:Key="GridLengthConverter" />
     <converter:LoadingBackgroundThicknessConverter x:Key="LoadingBackgroundThicknessConverter" />
     <converter:LoadingLineYConverter x:Key="LoadingLineYConverter" />

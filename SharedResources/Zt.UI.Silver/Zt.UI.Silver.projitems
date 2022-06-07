@@ -13,6 +13,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\Calendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)NumberInput\NumberPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,6 +71,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Calendar.xaml.cs">
+      <DependentUpon>Calendar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Loading.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BrushToColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\CheckBoxGlyphPathConverter.cs" />
@@ -81,6 +88,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ThicknessToDoubleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TreeViewVerticalChainConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventHandler\SearchTextChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)EventHandler\SelectedDateChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventHandler\TabItemRemovedEventHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Global\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Global\Extension.cs" />

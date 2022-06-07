@@ -53,7 +53,14 @@ namespace Zt.UI.Silver.Global
         Selector,
     }
     #endregion
-
+    #region Calendar
+    public enum CalendarMode
+    {
+        Date,
+        YearMonth,
+        Year,
+    }
+    #endregion
 
     #region ProgressBarStyle 进度条样式
     public enum ProgressBarStyle

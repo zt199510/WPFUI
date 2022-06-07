@@ -1,0 +1,456 @@
+﻿<UserControl
+    x:Class="Zt.UI.Silver.Calendar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Zlocal="clr-namespace:Zt.UI.Silver"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:Zt.UI.Silver.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Resources/Resource.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Resources/Converter.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Storyboard x:Key="Storyboard_DayToMonth">
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleDayGroup"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="1"
+                    To="0.75"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleDayGroup"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="1"
+                    To="0.75"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="GrdDayGroup"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="1.5"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="1.5"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="00:00:00"
+                    Storyboard.TargetName="GrdDayGroup"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}" />
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard_MonthToDay">
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="1"
+                    To="1.5"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="1"
+                    To="1.5"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleDayGroup"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="0.75"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleDayGroup"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="0.75"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="GrdDayGroup"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="00:00:00"
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}" />
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="GrdDayGroup"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard_MonthToYear">
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="1"
+                    To="0.75"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="1"
+                    To="0.75"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleYear"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="1.5"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleYear"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="1.5"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="GrdYear"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="00:00:00"
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}" />
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="GrdYear"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard_YearToMonth">
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleYear"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="1"
+                    To="1.5"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="ScaleYear"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="1"
+                    To="1.5"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    Storyboard.TargetName="GrdYear"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.2" />
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleX"
+                    From="0.75"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="ScaleMonth"
+                    Storyboard.TargetProperty="ScaleY"
+                    From="0.75"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CircleEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="00:00:00"
+                    Storyboard.TargetName="GrdYear"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}" />
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Collapsed}" />
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="GrdMonth"
+                    Storyboard.TargetProperty="(UIElement.Visibility)">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Visible}" />
+                </ObjectAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="GrdDayTitle" Height="40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button
+                x:Name="BtnDecYear"
+                Width="{Binding ActualHeight, ElementName=BtnDecYear}"
+                Zlocal:ButtonHelper.ButtonStyle="Link"
+                Zlocal:ButtonHelper.HoverBrush="{Binding ThemeBrush, ElementName=calendar}"
+                Click="BtnDecYear_Click"
+                Content=""
+                FontFamily="/Zt.UI.Silver;component/Resources/#fontawesome"
+                FontSize="{Binding FontSize, ElementName=calendar, Converter={StaticResource Add5Converter}}"
+                Foreground="{Binding Foreground, ElementName=calendar}" />
+            <Button
+                x:Name="BtnDecMonth"
+                Grid.Column="1"
+                Width="{Binding ActualHeight, ElementName=BtnDecMonth}"
+                Zlocal:ButtonHelper.ButtonStyle="Link"
+                Zlocal:ButtonHelper.HoverBrush="{Binding ThemeBrush, ElementName=calendar}"
+                Click="BtnDecMonth_Click"
+                Content=""
+                FontFamily="/Zt.UI.Silver;component/Resources/#fontawesome"
+                FontSize="{Binding FontSize, ElementName=calendar, Converter={StaticResource Add5Converter}}"
+                Foreground="{Binding Foreground, ElementName=calendar}" />
+            <Button
+                x:Name="BtnMonthYear"
+                Grid.Column="2"
+                Padding="0"
+                HorizontalAlignment="Center"
+                Zlocal:ButtonHelper.ButtonStyle="Link"
+                Zlocal:ButtonHelper.HoverBrush="{Binding ThemeBrush, ElementName=calendar}"
+                Click="BtnMonthYear_Click"
+                Content=""
+                FontFamily="/Zt.UI.Silver;component/Resources/#fontawesome"
+                FontSize="{Binding FontSize, ElementName=calendar, Converter={StaticResource Add3Converter}}"
+                Foreground="{Binding Foreground, ElementName=calendar}" />
+            <Button
+                x:Name="BtnIncMonth"
+                Grid.Column="3"
+                Width="{Binding ActualHeight, ElementName=BtnIncMonth}"
+                Zlocal:ButtonHelper.ButtonStyle="Link"
+                Zlocal:ButtonHelper.HoverBrush="{Binding ThemeBrush, ElementName=calendar}"
+                Click="BtnIncMonth_Click"
+                Content=""
+                FontFamily="/Zt.UI.Silver;component/Resources/#fontawesome"
+                FontSize="{Binding FontSize, ElementName=calendar, Converter={StaticResource Add5Converter}}"
+                Foreground="{Binding Foreground, ElementName=calendar}" />
+            <Button
+                x:Name="BtnIncYear"
+                Grid.Column="4"
+                Width="{Binding ActualHeight, ElementName=BtnIncYear}"
+                Zlocal:ButtonHelper.ButtonStyle="Link"
+                Zlocal:ButtonHelper.HoverBrush="{Binding ThemeBrush, ElementName=calendar}"
+                Click="BtnIncYear_Click"
+                Content=""
+                FontFamily="/Zt.UI.Silver;component/Resources/#fontawesome"
+                FontSize="{Binding FontSize, ElementName=calendar, Converter={StaticResource Add5Converter}}"
+                Foreground="{Binding Foreground, ElementName=calendar}" />
+        </Grid>
+        <Border
+            Grid.Row="1"
+            Margin="0,0,0,3"
+            VerticalAlignment="Bottom"
+            BorderBrush="{Binding BorderBrush, ElementName=calendar}"
+            BorderThickness="0,0,0,1"
+            Visibility="{Binding IsSplitLineVisible, ElementName=calendar, Converter={StaticResource BoolToVisibleConverter}}" />
+
+        <Canvas
+            x:Name="CvaMain"
+            Grid.Row="2"
+            ClipToBounds="True">
+            <Grid
+                x:Name="GrdDayGroup"
+                Width="{Binding ActualWidth, ElementName=CvaMain}"
+                Height="{Binding ActualHeight, ElementName=CvaMain}"
+                RenderTransformOrigin="0.5,0.5">
+                <Grid.RenderTransform>
+                    <ScaleTransform x:Name="ScaleDayGroup" />
+                </Grid.RenderTransform>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.2*" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid x:Name="GrdWeek">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+                <Grid x:Name="GrdDay" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+            <Grid
+                x:Name="GrdMonth"
+                Width="{Binding ActualWidth, ElementName=CvaMain}"
+                Height="{Binding ActualHeight, ElementName=CvaMain}"
+                RenderTransformOrigin="0.5,0.5"
+                Visibility="Collapsed">
+                <Grid.RenderTransform>
+                    <ScaleTransform x:Name="ScaleMonth" ScaleX="1.5" ScaleY="1.5" />
+                </Grid.RenderTransform>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid
+                x:Name="GrdYear"
+                Width="{Binding ActualWidth, ElementName=CvaMain}"
+                Height="{Binding ActualHeight, ElementName=CvaMain}"
+                RenderTransformOrigin="0.5,0.5"
+                Visibility="Collapsed">
+                <Grid.RenderTransform>
+                    <ScaleTransform x:Name="ScaleYear" />
+                </Grid.RenderTransform>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Canvas>
+
+    </Grid>
+</UserControl>

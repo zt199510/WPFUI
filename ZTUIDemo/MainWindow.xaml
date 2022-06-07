@@ -10,11 +10,15 @@
     Width="617"
     Height="617"
     AllowsTransparency="True"
-    Background="Transparent"
+    Background="Gray"
     ResizeMode="NoResize"
     WindowStyle="None"
     mc:Ignorable="d">
-    <Grid >
-      
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <zt:Calendar Grid.Row="1" CalendarMode="Date" />
     </Grid>
 </zt:WindwosHelper>
