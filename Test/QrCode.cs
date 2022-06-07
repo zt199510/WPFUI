@@ -51,7 +51,6 @@ namespace Test
                 result.StreamSource = stream;
                 result.EndInit();
                 result.Freeze();
-                
                 return result;
             }
         }

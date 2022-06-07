@@ -53,6 +53,18 @@ namespace Zt.UI.Silver.Global
         Selector,
     }
     #endregion
+
+
+    #region DateTimePickerMode
+    public enum DateTimePickerMode
+    {
+        DateTime,
+        Date,
+        Time,
+    }
+    #endregion
+
+
     #region Calendar
     public enum CalendarMode
     {
