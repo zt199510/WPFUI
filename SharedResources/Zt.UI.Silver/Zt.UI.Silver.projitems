@@ -61,6 +61,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\WindowsStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Loading.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventHandler\TabItemRemovedEventHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Global\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Global\Extension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\BaseUserControls\BaseModuleView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\ButtonHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\CheckBoxHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\ComboBoxHelper.cs" />
@@ -91,6 +96,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\TabControlHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\TextBoxHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\TreeViewHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Control\WindwosHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mode\BrushAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NumberInput\NumberPage.xaml.cs">
       <DependentUpon>NumberPage.xaml</DependentUpon>

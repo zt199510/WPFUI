@@ -12,6 +12,7 @@
         <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Themes/ProgressBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Themes/TabControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Themes/TreeView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Zt.UI.Silver;component/Themes/WindowsStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
 </ResourceDictionary>
